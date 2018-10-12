@@ -13,6 +13,8 @@ public class AlarmJobService extends android.app.job.JobService {
     @Override
     public boolean onStartJob(JobParameters params) {
 
+        Log.i(getClass().getName(), "onStartJob");
+
         NotificationCompat.Builder builder =
                 new NotificationCompat.Builder(this)
                         .setSmallIcon(R.mipmap.ic_launcher)
