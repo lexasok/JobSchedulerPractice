@@ -28,8 +28,9 @@ public class MainActivity extends AppCompatActivity {
 
         JobInfo job =
                 new JobInfo.Builder(1, new ComponentName(this, AlarmJobService.class))
-                .setMinimumLatency(10*1000)
-                .setOverrideDeadline(15*1000)
+                .setMinimumLatency(60*1000)
+                .setOverrideDeadline(70*1000)
+                .setBackoffCriteria(5*1000, JobInfo.BACKOFF_POLICY_LINEAR)
                 .build();
 
         if (jobScheduler != null) {
