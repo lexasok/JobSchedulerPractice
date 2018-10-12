@@ -17,21 +17,28 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
-
     }
 
     public void buttonSetAlarmClicked(View view) {
+
+        setAlarm();
+    }
+
+    private void startAlarmService() {
+
+    }
+
+    private void setAlarm() {
 
         JobScheduler jobScheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
 
         JobInfo job =
                 new JobInfo.Builder(1, new ComponentName(this, AlarmJobService.class))
-                .setMinimumLatency(60*1000)
-                .setOverrideDeadline(70*1000)
-                .setBackoffCriteria(5*1000, JobInfo.BACKOFF_POLICY_LINEAR)
-                .build();
+                        .setMinimumLatency(60*1000)
+                        .setOverrideDeadline(70*1000)
+                        .setBackoffCriteria(5*1000, JobInfo.BACKOFF_POLICY_LINEAR)
+                        .setPersisted(true)
+                        .build();
 
         if (jobScheduler != null) {
             jobScheduler.schedule(job);
