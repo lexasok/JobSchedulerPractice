@@ -3,6 +3,7 @@ package net.ozero.jobschedulerprectice;
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
 import android.content.ComponentName;
+import android.content.IntentSender;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,10 +23,6 @@ public class MainActivity extends AppCompatActivity {
     public void buttonSetAlarmClicked(View view) {
 
         setAlarm();
-    }
-
-    private void startAlarmService() {
-
     }
 
     private void setAlarm() {
