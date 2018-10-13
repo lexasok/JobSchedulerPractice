@@ -33,11 +33,12 @@ public class AlarmJobService extends android.app.job.JobService {
                         .setSmallIcon(R.mipmap.ic_launcher)
                         .setContentTitle(timeStr)
                         .setContentText("№ " + id)
+                        .setAutoCancel(true)
                         .setVibrate(new long[] {500, 500, 500});
 
         Notification notification = builder.build();
 
-        notification.flags = notification.flags | Notification.FLAG_NO_CLEAR;
+        notification.flags = notification.flags | Notification.FLAG_NO_CLEAR | Notification.FLAG_ONGOING_EVENT;
 
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
