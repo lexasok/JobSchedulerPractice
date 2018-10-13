@@ -37,6 +37,8 @@ public class AlarmJobService extends android.app.job.JobService {
 
         Notification notification = builder.build();
 
+        notification.flags = notification.flags | Notification.FLAG_NO_CLEAR;
+
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 

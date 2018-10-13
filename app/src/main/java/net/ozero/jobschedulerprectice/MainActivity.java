@@ -33,10 +33,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void setAlarm() {
 
+        PersistableBundle bundle = getBundle();
+
         JobScheduler jobScheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
 
         JobInfo job =
-                new JobInfo.Builder(1, new ComponentName(this, AlarmJobService.class))
+                new JobInfo.Builder(bundle.getInt(EXTRA_ID), new ComponentName(this, AlarmJobService.class))
                         .setMinimumLatency(80*1000)
                         .setOverrideDeadline(85*1000)
                         .setBackoffCriteria(5*1000, JobInfo.BACKOFF_POLICY_LINEAR)
