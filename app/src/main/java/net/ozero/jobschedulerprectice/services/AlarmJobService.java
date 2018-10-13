@@ -19,7 +19,8 @@ public class AlarmJobService extends android.app.job.JobService {
                 new NotificationCompat.Builder(this)
                         .setSmallIcon(R.mipmap.ic_launcher)
                         .setContentTitle("Title")
-                        .setContentText("Notification text");
+                        .setContentText("Notification text")
+                        .setVibrate(new long[] {500, 500, 500});
 
         Notification notification = builder.build();
 
