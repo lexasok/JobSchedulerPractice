@@ -33,13 +33,14 @@ public class AlarmJobService extends android.app.job.JobService {
             Log.i(getClass().getName(), "Notification manager is null");
         }
 
-        jobFinished(params, false);
+        jobFinished(params, true);
 
         return false;
     }
 
     @Override
     public boolean onStopJob(JobParameters params) {
-        return false;
+        Log.i(getClass().getName(), "onStopJob");
+        return true;
     }
 }
