@@ -55,7 +55,9 @@ public class MainActivity extends AppCompatActivity {
     private PersistableBundle getBundle() {
 
         PersistableBundle bundle = new PersistableBundle();
-        bundle.putInt(EXTRA_ID, IdGenerator.INSTANCE.getNextId());
+        int id = IdGenerator.INSTANCE.getNextId();
+
+        bundle.putInt(EXTRA_ID, id);
         bundle.putLong(EXTRA_TIME, System.currentTimeMillis());
 
         return bundle;
