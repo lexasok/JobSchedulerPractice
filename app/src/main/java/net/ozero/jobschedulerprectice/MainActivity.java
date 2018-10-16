@@ -3,6 +3,7 @@ package net.ozero.jobschedulerprectice;
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
 import android.content.ComponentName;
+import android.content.Intent;
 import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 
 import net.ozero.jobschedulerprectice.services.AlarmJobService;
+import net.ozero.jobschedulerprectice.services.AlarmService;
 import net.ozero.jobschedulerprectice.services.IdGenerator;
 
 public class MainActivity extends AppCompatActivity {
@@ -49,30 +51,16 @@ public class MainActivity extends AppCompatActivity {
 
     private void setAlarm() {
 
-        PersistableBundle bundle = getBundle();
+        Intent intent = new Intent(this, AlarmService.class);
+        intent.putExtra(EXTRA_ID, mId);
+        intent.putExtra(EXTRA_TIME, System.currentTimeMillis());
 
-        JobScheduler jobScheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
-
-        JobInfo job =
-                new JobInfo.Builder(bundle.getInt(EXTRA_ID), new ComponentName(this, AlarmJobService.class))
-                        .setMinimumLatency(15*1000)
-                        .setOverrideDeadline(20*1000)
-                        .setBackoffCriteria(5*1000, JobInfo.BACKOFF_POLICY_LINEAR)
-                        .setPersisted(true)
-                        .setExtras(getBundle())
-                        .build();
-
-        if (jobScheduler != null) {
-            jobScheduler.schedule(job);
-            Log.i(getClass().getName(), "job set");
-        } else {
-            Log.i(getClass().getName(), "scheduler = null!");
-        }
+        startService(intent);
     }
 
-    private PersistableBundle getBundle() {
+    private Bundle getBundle() {
 
-        PersistableBundle bundle = new PersistableBundle();
+        Bundle bundle = new Bundle();
 
         int id = mId;
         bundle.putInt(EXTRA_ID, id);
